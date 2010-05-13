@@ -40,6 +40,7 @@ import org.w3c.dom.Element;
  * 'host,' 'port,' 'backup-host,' and 'backup-port' properties
  *
  * @author Josh Long
+ * @since May 11, 2010
  */
 public class HornetQNamespaceHandler extends NamespaceHandlerSupport {
 

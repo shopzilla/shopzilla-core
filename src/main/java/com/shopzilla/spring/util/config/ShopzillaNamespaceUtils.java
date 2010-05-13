@@ -31,6 +31,7 @@ import org.w3c.dom.Element;
 
 /**
  * This class was stolen largely from {@link org.springframework.integration.config.xml.IntegrationNamespaceUtils} from the Spring Integration project: it's useful, but we can't risk having a forced dependency on it ATM.
+ * 
  */
 public class ShopzillaNamespaceUtils {
 

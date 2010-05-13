@@ -34,6 +34,7 @@ import java.util.Map;
  * This builds a {@link org.hornetq.jms.client.HornetQConnectionFactory} to handle connections to a HornetQ broker
  *
  * @author Josh Long
+ * @since May 11, 2010
  *
  */
 public class HornetQConnectionFactoryFactory extends AbstractFactoryBean<HornetQConnectionFactory> {
