@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ *
+ * Copyright (C) 2010 Shopzilla, Inc
+ *
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ *
+ * http://tech.shopzilla.com
+ *
+ *
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:hornetq="http://www.shopzilla.com/schema/spring/messaging/hornetq"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+      http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-2.5.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.shopzilla.com/schema/spring/messaging/hornetq http://www.shopzilla.com/schema/spring/messaging/hornetq/shopzilla-hornetq-1.0.xsd
+      ">
+
+  <context:component-scan base-package="com.shopzilla.spring.messaging.hornetq"/>
+
+  <bean class="org.springframework.jms.core.JmsTemplate" p:connectionFactory-ref="connectionFactory"/>
+
+  <bean id="connectionFactory" class="org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter"
+        p:password="password" p:username="user">
+    <property name="targetConnectionFactory">
+      <hornetq:connection-factory host="localhost" port="5445" failover-on-server-shutdown="false" reconnect-attempts="0"/>
+    </property>
+  </bean>
+
+  <!--
+
+  This is how it would get done <em> otherwise</em>
+
+  <bean id="jmsUserCredentialsConnectionFactory"
+        class="org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter">
+    <property name="targetConnectionFactory">
+      <bean class="org.hornetq.jms.client.HornetQConnectionFactory">
+        <constructor-arg>
+          <bean class="org.hornetq.api.core.TransportConfiguration">
+            <constructor-arg
+              value="org.hornetq.integration.transports.netty.NettyConnectorFactory"/>
+            <constructor-arg>
+              <map key-type="java.lang.String" value-type="java.lang.Object">
+                <entry key="host" value="${JMS_SERVER_HOST}"/>
+                <entry key="port" value="${JMS_SERVER_PORT}"/>
+              </map>
+            </constructor-arg>
+          </bean>
+        </constructor-arg>
+        <constructor-arg>
+          <bean class="org.hornetq.api.core.TransportConfiguration">
+            <constructor-arg
+              value="org.hornetq.integration.transports.netty.NettyConnectorFactory"/>
+            <constructor-arg>
+              <map key-type="java.lang.String" value-type="java.lang.Object">
+                <entry key="host" value="${JMS_SERVER_BACKUP_HOST}"/>
+                <entry key="port" value="${JMS_SERVER_BACKUP_PORT}"/>
+              </map>
+            </constructor-arg>
+          </bean>
+        </constructor-arg>
+        <property name="failoverOnServerShutdown" value="true"/>
+        <property name="reconnectAttempts" value="0"/>
+      </bean>
+
+    </property>
+    <property name="username" value="${JMS_SERVER_USERNAME}"/>
+    <property name="password" value="${JMS_SERVER_PASSWORD}"/>
+  </bean>
+  -->
+
+
+</beans>
+
