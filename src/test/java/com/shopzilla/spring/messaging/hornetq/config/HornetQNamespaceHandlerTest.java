@@ -66,7 +66,6 @@ public class HornetQNamespaceHandlerTest {
         final Element elem = this.context.mock(Element.class);
         final ParserContext parserContext = null;
         this.context.checking(new Expectations() {
-
             {
                 one(elem).getAttribute("host");
                 will(returnValue(host));
