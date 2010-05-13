@@ -41,6 +41,7 @@ import javax.jms.Session;
  *
  * @author Josh Long
  * @see {@link com.shopzilla.spring.messaging.hornetq.HornetQConnectionFactoryFactory} the actual {@link javax.jms.ConnectionFactory} factory implementation.
+ * @since May 10, 2010 
  */
 
 @Component
