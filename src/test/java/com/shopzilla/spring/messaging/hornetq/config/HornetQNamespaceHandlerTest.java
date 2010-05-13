@@ -33,6 +33,12 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 
+/**
+ *
+ * A unit test for the {@link com.shopzilla.spring.messaging.hornetq.config.HornetQNamespaceHandler} code which teaches Spring how to parse a relevant fragment of XML 
+ *
+ * @author Josh Long
+ */
 public class HornetQNamespaceHandlerTest {
     private HornetQNamespaceHandler hornetQNamespaceHandler;
     private HornetQNamespaceHandler.HornetQConnectionFactoryFactoryBeanDefinitionParser hornetQConnectionFactoryFactoryBeanDefinitionParser;

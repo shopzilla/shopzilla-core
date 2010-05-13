@@ -36,6 +36,7 @@ import org.w3c.dom.Element;
 
 /**
  *
+ * Unit tests doe {@link com.shopzilla.spring.util.config.ShopzillaNamespaceUtils} 
  *
  * @author Josh Long
  *
