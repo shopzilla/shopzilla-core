@@ -24,13 +24,15 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.shopzilla.utilities</groupId>
-  <artifactId>spring</artifactId>
+  <groupId>com.shopzilla</groupId>
+  <artifactId>core</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>core</name>
   <properties>
     <spring.version>3.0.2.RELEASE</spring.version>
     <junit.version>4.7</junit.version>
+    <hornetq.version>2.0.0.GA</hornetq.version>
+    <jms.version>1.1</jms.version>
   </properties>
 
   <contributors>
@@ -47,7 +49,7 @@
     <contributor>
       <name>Robert Roland</name>
       <email>rroland@shopzilla.com</email>
-      <url>http://robertroland.org</url>      
+      <url>http://robertroland.org</url>
     </contributor>
     <contributor>
       <name>Josh Long</name>
@@ -62,23 +64,105 @@
 
   <dependencyManagement>
     <dependencies>
+
+      <!--
+          JMS messaging realted jars
+      -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jms</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-jms_1.1_spec</artifactId>
+        <version>1.1</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hornetq</groupId>
+        <artifactId>hornetq-core-client</artifactId>
+        <version>${hornetq.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hornetq</groupId>
+        <artifactId>hornetq-jms-client</artifactId>
+        <version>${hornetq.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hornetq</groupId>
+        <artifactId>hornetq-transports</artifactId>
+        <version>${hornetq.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.netty</groupId>
+        <artifactId>netty</artifactId>
+        <version>3.1.5.GA</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <version>3.2.1</version>
+      </dependency>
+      <dependency>
+        <groupId>cglib</groupId>
+        <artifactId>cglib-nodep</artifactId>
+        <version>2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>1.6.5</version>
+      </dependency>
+      <dependency>
+        <groupId>javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>3.4.GA</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.8.2</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.jms</groupId>
+        <artifactId>jms</artifactId>
+        <version>1.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jms</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
         <version>${spring.version}</version>
-        <scope>compile</scope>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context-support</artifactId>
         <version>${spring.version}</version>
-        <scope>compile</scope>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-core</artifactId>
         <version>${spring.version}</version>
-        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jmock</groupId>
+        <artifactId>jmock-legacy</artifactId>
+        <version>2.5.1</version>
+      </dependency>
+        <dependency>
+        <groupId>org.jmock</groupId>
+        <artifactId>jmock</artifactId>
+        <version>2.5.1</version>
       </dependency>
       <dependency>
         <groupId>junit</groupId>
@@ -89,6 +173,34 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jms</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hornetq</groupId>
+      <artifactId>hornetq-core-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hornetq</groupId>
+      <artifactId>hornetq-jms-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hornetq</groupId>
+      <artifactId>hornetq-transports</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.netty</groupId>
+      <artifactId>netty</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
@@ -106,14 +218,16 @@
       <artifactId>junit</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.apache.geronimo.specs</groupId>
+      <artifactId>geronimo-jms_1.1_spec</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.jmock</groupId>
       <artifactId>jmock</artifactId>
-      <version>2.5.1</version>
     </dependency>
     <dependency>
       <groupId>org.jmock</groupId>
       <artifactId>jmock-legacy</artifactId>
-      <version>2.5.1</version>
     </dependency>
   </dependencies>
   <build>

@@ -35,7 +35,10 @@ import org.w3c.dom.Element;
 
 
 /**
- * @author <a href="mailto:josh@joshlong.com">Josh Long</a>
+ *
+ *
+ * @author Josh Long
+ *
  */
 public class ShopzillaNamespaceUtilsTest {
     private Mockery context = new Mockery() {
