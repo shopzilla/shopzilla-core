@@ -35,10 +35,9 @@ import org.w3c.dom.Element;
 
 /**
  * This configures a no-frills {@link javax.jms.ConnectionFactory} for JBoss's HornetQ message broker.
- * <p/>
- * This, in tandem with the META-INF/spring.(handlers|schemas) files, teaches Spring how to handle a given namespace.
- * <p/>
- * You may specify a primary and a backup host for the message queue using the 'host,' 'port,' 'backup-host,' and 'backup-port' properties
+ * This, in tandem with the META-INF/spring.(handlers|schemas) files, teaches Spring how to handle a
+ * given namespace. You may specify a primary and a backup host for the message queue using the
+ * 'host,' 'port,' 'backup-host,' and 'backup-port' properties
  *
  * @author Josh Long
  */
@@ -49,7 +48,7 @@ public class HornetQNamespaceHandler extends NamespaceHandlerSupport {
     }
 
     /**
-     * This handles the task of configuring the recipient.
+     * parser for the hornetq:connection-factory element.
      */
     static class HornetQConnectionFactoryFactoryBeanDefinitionParser extends AbstractBeanDefinitionParser {
 
